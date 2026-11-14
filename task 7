@@ -1,0 +1,63 @@
+
+#include <stdio.h>
+
+unsigned long original(unsigned long n)
+{
+    unsigned long count = 0;
+
+    if (n < 2)
+        return 0;
+
+    for (unsigned long i = 2; i * i <= n; i++)
+    {
+        count++;
+
+        if (n % i == 0)
+            break;
+    }
+
+    return count;
+}
+
+unsigned long redesigned(unsigned long n)
+{
+    unsigned long count = 0;
+
+    if (n < 2)
+        return 0;
+
+    if (n == 2)
+        return 1;
+
+    count++;
+
+    if (n % 2 == 0)
+        return count;
+
+    for (unsigned long i = 3; i * i <= n; i += 2)
+    {
+        count++;
+
+        if (n % i == 0)
+            break;
+    }
+
+    return count;
+}
+
+int main()
+{
+    unsigned long numbers[] = {97, 100, 7919, 1000003};
+
+    printf("Number\tOriginal\tRedesigned\n");
+
+    for (int i = 0; i < 4; i++)
+    {
+        printf("%lu\t%lu\t\t%lu\n",
+               numbers[i],
+               original(numbers[i]),
+               redesigned(numbers[i]));
+    }
+
+    return 0;
+}
