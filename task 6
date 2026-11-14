@@ -1,0 +1,45 @@
+
+#include <stdio.h>
+
+int main()
+{
+    double balance = 10000;
+    double rate = 0.02;
+    double repayment = 2000;
+    double interest;
+    double payment;
+    double total_interest = 0;
+
+    int month = 0;
+
+    while (balance > 0.005 && month < 360)
+    {
+        month++;
+
+        interest = balance * rate;
+        balance = balance + interest;
+
+        total_interest += interest;
+
+        if (balance < repayment)
+            payment = balance;
+        else
+            payment = repayment;
+
+        balance = balance - payment;
+
+        printf("Month %d: Interest = %.2f, "
+               "Payment = %.2f, Balance = %.2f\n",
+               month, interest, payment, balance);
+    }
+
+    printf("\nTotal months = %d\n", month);
+    printf("Total interest = %.2f\n", total_interest);
+
+    if (balance > 0.005)
+        printf("Loan not fully repaid\n");
+    else
+        printf("Loan fully repaid\n");
+
+    return 0;
+}
